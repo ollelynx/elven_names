@@ -108,7 +108,8 @@ def test_name_9():
     en = ElfNameGenerator(*elf_name_numbers)
     expected_name = "Shelian Zathusro"
     assert expected_name == en.get_name()
-    expected_definition = "Age/time master/mistress Royal harp/harper/walker/walks"
+    expected_definition = "Age/time master/mistress Royal " \
+                          "harp/harper/walker/walks"
     assert expected_definition == en.get_definition()
 
 
