@@ -24,7 +24,7 @@ def parse_data(row: str, suffix_table: bool) -> dict:
         else:
             meaning.append(char)
 
-    return {word_part[0]: {key: word_part[1:], 'meaning': meaning}}
+    return {key: word_part, 'meaning': meaning}
 
 
 def _read_from_file(file_name: str,

@@ -96,13 +96,14 @@ class ElfNameGenerator:
 
         prf_num, prefix = name_number[0], '\''
         if isinstance(prf_num, int):
-            prefix = list(self._t2_data[name_number[0]])[0]
+            prefix = self._t2_data[prf_num]['prefix'][0]  # for 1st element
 
         suf_num, suffix = name_number[1], ''
         if isinstance(suf_num, int):
-            suffix = list(self._t3_data[suf_num])[0]
+            suffix = self._t3_data[suf_num]['suffix'][0]  # for 1st element
         elif isinstance(suf_num, list):
-            suffix = ''.join([list(self._t3_data[_])[0] for _ in suf_num])
+            suffix = ''.join([self._t3_data[_]['suffix'][0]  # for 1st element
+                              for _ in suf_num])
 
         if prefix == "'":
             prefix, suffix = suffix.capitalize(), prefix
@@ -115,7 +116,7 @@ class ElfNameGenerator:
 
         def get_meaning(key, t3=False):
             table = self._t2_data if not t3 else self._t3_data
-            return list(table[key].values())[0]['meaning']
+            return table[key]['meaning']
 
         prf_num, prefix = name_number[0], ''
         if isinstance(prf_num, int):

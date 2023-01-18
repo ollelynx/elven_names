@@ -24,7 +24,8 @@ DEBUG = env.bool('DEBUG', 'False')
 
 if __name__ == "__main__":
     if DEBUG:
-        # TEST:  >>> "9": Shelian Zathusro
+        # >>> "9": Shelian Zathusro
+        # >>> "9": Age/time master/mistress Royal harp,harper/walker,walks
         elf_name_numbers, dice_number = ([79, 49], [99, [85, 70]]), 9
     else:
         dice_number = roll_dice()

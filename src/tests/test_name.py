@@ -27,6 +27,7 @@ def _make_test_first_name():
 def test_first_name():
     """Create first name based on full and first part only."""
     en1 = _make_test_full_name()
+    print(en1._t2_data, en1._t3_data)
     name1 = en1._make_a_word(en1._first_part)
     expected1 = "Shelian"
     assert expected1 == name1

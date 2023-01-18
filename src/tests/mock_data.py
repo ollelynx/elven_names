@@ -9,33 +9,28 @@ elf_name1 = ElfNameMock(
     [99, [85, 70]],
     {
         79: {
-            'She': {
-                'suffix': [],
-                'meaning': ['age', 'time']}
+            'prefix': ['She'],
+            'meaning': ['age', 'time']
         },
         99: {
-            'Za': {
-                'suffix': [],
-                'meaning': ['royal']}
-        }
+            'prefix': ['Za'],
+            'meaning': ['royal']
+        },
     },
     {
         49: {
-            'lian': {
-                'suffix': ['lia'],
-                'meaning': ['master', 'mistress']}
+            'suffix': ['lian', 'lia'],
+            'meaning': ['master', 'mistress']
         },
         70: {
-            'ro': {
-                'suffix': ['ri', 'ron'],
-                'meaning': ['walker', 'walks']}
+            'suffix': ['ro', 'ri', 'ron'],
+            'meaning': ['walker', 'walks']
         },
         85: {
-            'thus': {
-                'suffix': ['thas', 'aethus', 'aethas'],
-                'meaning': ['harp', 'harper']}
+            'suffix': ['thus', 'thas', 'aethus', 'aethas'],
+            'meaning': ['harp', 'harper']
         }
-    },
+    }
 )
 
 
@@ -44,18 +39,16 @@ elf_name2 = ElfNameMock(
     None,
     {
         27: {
-            'Eil': {
-                'suffix': [],
-                'meaning': ['azure', 'blue']}
+            'prefix': ['Eil'],
+            'meaning': ['azure', 'blue']
         }
     },
     {
         65: {
-            'rah': {
-                'suffix': ['rae', 'raee'],
-                'meaning': ['beast']}
-        },
-    },
+            'suffix': ['rah', 'rae', 'raee'],
+            'meaning': ['beast']
+        }
+    }
 )
 
 
@@ -72,46 +65,32 @@ def table2_line():
 
 def table2_parsed_line():
     row1 = {
-        'Ty': {
-            'meaning': ['crystal'],
-            'prefix': ['Try']
-        }
+        'meaning': ['crystal'],
+        'prefix': ['Ty', 'Try']
     }
     row2 = {
-        'Uth': {
-            'meaning': ['wizard'],
-            'prefix': []
-        }
+        'meaning': ['wizard'],
+        'prefix': ['Uth']
     }
     row3 = {
-        'Ver': {
-            'meaning': ['peace'],
-            'prefix': []
-        }
+        'meaning': ['peace'],
+        'prefix': ['Ver']
     }
     row4 = {
-        'Vil': {
-            'meaning': ['finger', 'point'],
-            'prefix': []
-        }
+        'meaning': ['finger', 'point'],
+        'prefix': ['Vil']
     }
     row5 = {
-        'Von': {
-            'meaning': ['ice'],
-            'prefix': []
-        }
+        'meaning': ['ice'],
+        'prefix': ['Von']
     }
     row6 = {
-        'Ya': {
-            'meaning': ['bridge', 'path', 'way'],
-            'prefix': []
-        }
+        'meaning': ['bridge', 'path', 'way'],
+        'prefix': ['Ya']
     }
     row7 = {
-        'Za': {
-            'meaning': ['royal'],
-            'prefix': []
-        }
+        'meaning': ['royal'],
+        'prefix': ['Za']
     }
     return list(locals().values())
 
@@ -129,45 +108,31 @@ def table3_line():
 
 def table3_parsed_line():
     row1 = {
-        'ro': {
-            'meaning': ['walker', 'walks'],
-            'suffix': ['ri', 'ron']
-        }
+        'meaning': ['walker', 'walks'],
+        'suffix': ['ro', 'ri', 'ron']
     }
     row2 = {
-        'ruil': {
-            'meaning': ['noble'],
-            'suffix': ['aruil', 'eruil']
-        }
+        'meaning': ['noble'],
+        'suffix': ['ruil', 'aruil', 'eruil']
     }
     row3 = {
-        'sal': {
-            'meaning': ['honey', 'sweet'],
-            'suffix': ['isal', 'sali']
-        }
+        'meaning': ['honey', 'sweet'],
+        'suffix': ['sal', 'isal', 'sali']
     }
     row4 = {
-        'san': {
-            'meaning': ['drink', 'wine'],
-            'suffix': []
-        }
+        'meaning': ['drink', 'wine'],
+        'suffix': ['san']
     }
     row5 = {
-        'spar': {
-            'meaning': ['fist'],
-            'suffix': []
-        }
+        'meaning': ['fist'],
+        'suffix': ['spar']
     }
     row6 = {
-        'tae': {
-            'meaning': ['beloved', 'love'],
-            'suffix': ['itae']
-        }
+        'meaning': ['beloved', 'love'],
+        'suffix': ['tae', 'itae']
     }
     row7 = {
-        'thal': {
-            'meaning': ['heal', 'healer', 'healing'],
-            'suffix': ['tha', 'ethal', 'etha']
-        }
+        'meaning': ['heal', 'healer', 'healing'],
+        'suffix': ['thal', 'tha', 'ethal', 'etha']
     }
     return list(locals().values())
