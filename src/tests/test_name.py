@@ -78,7 +78,7 @@ def test_full_name_definition():
     assert expected1 == name1
 
     def1 = en1.get_definition()
-    expected = "Age/time master/mistress Royal harp/harper/walker/walks"
+    expected = "Age/time master/mistress Royal harp,harper/walker,walks"
     assert expected == def1
 
 
@@ -109,7 +109,7 @@ def test_name_9():
     expected_name = "Shelian Zathusro"
     assert expected_name == en.get_name()
     expected_definition = "Age/time master/mistress Royal " \
-                          "harp/harper/walker/walks"
+                          "harp,harper/walker,walks"
     assert expected_definition == en.get_definition()
 
 
@@ -119,7 +119,7 @@ def test_name_10():
     en = ElfNameGenerator(*elf_name_numbers)
     expected_name = "Dar'Naidrimal"
     assert expected_name == en.get_name()
-    expected_definition = "World Oak flight/flyer/harmony"
+    expected_definition = "World Oak flight,flyer/harmony"
     assert expected_definition == en.get_definition()
 
 
