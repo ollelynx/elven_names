@@ -9,7 +9,7 @@ formal house name can be generated as well by rolling randomly on Optional
 Table 1B. These formal House names would be used for ancient noble houses,
 usually of Grey or Gold Elf Descent.
 """
-import os
+from environs import Env
 
 from elf_name_generator import (
     ElfNameGenerator,
@@ -18,7 +18,8 @@ from elf_name_generator import (
     roll_dice_message,
 )
 
-DEBUG = bool(os.getenv('DEBUG', 'False'))
+env = Env()
+DEBUG = env.bool('DEBUG', 'False')
 
 
 if __name__ == "__main__":
