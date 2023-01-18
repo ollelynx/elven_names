@@ -125,9 +125,11 @@ class ElfNameGenerator:
         if isinstance(suf_num, int):
             suffix = get_meaning(suf_num, True)
         elif isinstance(suf_num, list):
+            suffix = []
             sfx_list = [get_meaning(_, True) for _ in suf_num]
             for s_l in sfx_list:
-                suffix.join(delimiter(s_l).join(s_l))
+                delimiter_ = "" if len(s_l) == 1 else "/"
+                suffix.append(delimiter_.join(s_l))
 
         definition = delimiter(prefix).join(prefix).capitalize()
 
