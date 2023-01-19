@@ -25,7 +25,7 @@ from tests.mock_data import (
     ],
 )
 def test_parse_line_of_table3(row_input, expected):
-    result = parse_data(row_input, True)
+    result = parse_data(row_input)
     assert result == expected
 
 
@@ -43,5 +43,5 @@ def test_parse_line_of_table3(row_input, expected):
     ],
 )
 def test_parse_line_of_table2(row_input, expected):
-    result = parse_data(row_input, suffix_table=False)
+    result = parse_data(row_input)
     assert result == expected

@@ -9,25 +9,25 @@ elf_name1 = ElfNameMock(
     [99, [85, 70]],
     {
         79: {
-            'prefix': ['She'],
+            'name': ['She'],
             'meaning': ['age', 'time']
         },
         99: {
-            'prefix': ['Za'],
+            'name': ['Za'],
             'meaning': ['royal']
         },
     },
     {
         49: {
-            'suffix': ['lian', 'lia'],
+            'name': ['lian', 'lia'],
             'meaning': ['master', 'mistress']
         },
         70: {
-            'suffix': ['ro', 'ri', 'ron'],
+            'name': ['ro', 'ri', 'ron'],
             'meaning': ['walker', 'walks']
         },
         85: {
-            'suffix': ['thus', 'thas', 'aethus', 'aethas'],
+            'name': ['thus', 'thas', 'aethus', 'aethas'],
             'meaning': ['harp', 'harper']
         }
     }
@@ -39,13 +39,13 @@ elf_name2 = ElfNameMock(
     None,
     {
         27: {
-            'prefix': ['Eil'],
+            'name': ['Eil'],
             'meaning': ['azure', 'blue']
         }
     },
     {
         65: {
-            'suffix': ['rah', 'rae', 'raee'],
+            'name': ['rah', 'rae', 'raee'],
             'meaning': ['beast']
         }
     }
@@ -66,31 +66,31 @@ def table2_line():
 def table2_parsed_line():
     row1 = {
         'meaning': ['crystal'],
-        'prefix': ['Ty', 'Try']
+        'name': ['Ty', 'Try']
     }
     row2 = {
         'meaning': ['wizard'],
-        'prefix': ['Uth']
+        'name': ['Uth']
     }
     row3 = {
         'meaning': ['peace'],
-        'prefix': ['Ver']
+        'name': ['Ver']
     }
     row4 = {
         'meaning': ['finger', 'point'],
-        'prefix': ['Vil']
+        'name': ['Vil']
     }
     row5 = {
         'meaning': ['ice'],
-        'prefix': ['Von']
+        'name': ['Von']
     }
     row6 = {
         'meaning': ['bridge', 'path', 'way'],
-        'prefix': ['Ya']
+        'name': ['Ya']
     }
     row7 = {
         'meaning': ['royal'],
-        'prefix': ['Za']
+        'name': ['Za']
     }
     return list(locals().values())
 
@@ -109,30 +109,30 @@ def table3_line():
 def table3_parsed_line():
     row1 = {
         'meaning': ['walker', 'walks'],
-        'suffix': ['ro', 'ri', 'ron']
+        'name': ['ro', 'ri', 'ron']
     }
     row2 = {
         'meaning': ['noble'],
-        'suffix': ['ruil', 'aruil', 'eruil']
+        'name': ['ruil', 'aruil', 'eruil']
     }
     row3 = {
         'meaning': ['honey', 'sweet'],
-        'suffix': ['sal', 'isal', 'sali']
+        'name': ['sal', 'isal', 'sali']
     }
     row4 = {
         'meaning': ['drink', 'wine'],
-        'suffix': ['san']
+        'name': ['san']
     }
     row5 = {
         'meaning': ['fist'],
-        'suffix': ['spar']
+        'name': ['spar']
     }
     row6 = {
         'meaning': ['beloved', 'love'],
-        'suffix': ['tae', 'itae']
+        'name': ['tae', 'itae']
     }
     row7 = {
         'meaning': ['heal', 'healer', 'healing'],
-        'suffix': ['thal', 'tha', 'ethal', 'etha']
+        'name': ['thal', 'tha', 'ethal', 'etha']
     }
     return list(locals().values())

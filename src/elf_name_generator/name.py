@@ -25,8 +25,9 @@ class ElfNameGenerator:
               and generated automatically.
         """
         self._dice_number = dice_number
-        self._t2_data = None
-        self._t3_data = None
+        self._prefixes = None
+        self._suffixes = None
+
         if first_part:
             self._first_part = first_part
             self._last_part = last_part
@@ -49,7 +50,7 @@ class ElfNameGenerator:
 
     def get_alternatives(self):
         """Retrieve alternative names if any."""
-        if not self._t2_data:
+        if not self._prefixes:
             raise NameError('Run name generator to retrieve alternative '
                             'names.')
 
@@ -62,7 +63,7 @@ class ElfNameGenerator:
             input: (["'", 32], [43, [16, 99]])
             output: Wisdom/wise Staff
         """
-        if not self._t2_data:
+        if not self._prefixes:
             raise NameError('Run name generator to retrieve its definition.')
 
         definition = self._make_a_definition(self._first_part)
@@ -96,13 +97,13 @@ class ElfNameGenerator:
 
         prf_num, prefix = name_number[0], '\''
         if isinstance(prf_num, int):
-            prefix = self._t2_data[prf_num]['prefix'][0]  # for 1st element
+            prefix = self._prefixes[prf_num]['name'][0]  # for 1st element
 
         suf_num, suffix = name_number[1], ''
         if isinstance(suf_num, int):
-            suffix = self._t3_data[suf_num]['suffix'][0]  # for 1st element
+            suffix = self._suffixes[suf_num]['name'][0]  # for 1st element
         elif isinstance(suf_num, list):
-            suffix = ''.join([self._t3_data[_]['suffix'][0]  # for 1st element
+            suffix = ''.join([self._suffixes[_]['name'][0]  # for 1st element
                               for _ in suf_num])
 
         if prefix == "'":
@@ -115,7 +116,7 @@ class ElfNameGenerator:
             return '/' if len(name) > 1 else ''
 
         def get_meaning(key, t3=False):
-            table = self._t2_data if not t3 else self._t3_data
+            table = self._prefixes if not t3 else self._suffixes
             return table[key]['meaning']
 
         prf_num, prefix = name_number[0], ''
@@ -144,11 +145,13 @@ class ElfNameGenerator:
         Get text lines of given numbers only.
         """
         last_part_prefix, last_part_suffix = '', ''
+        first_part_prefix, first_part_suffix = self._first_part
 
         if isinstance(self._last_part, list):
             last_part_prefix = self._last_part[0]
             if len(self._last_part) > 1:
                 last_part_suffix = self._last_part[1]
 
-        self._t2_data, self._t3_data = get_table_data(
-            self._first_part, last_part_prefix, last_part_suffix)
+        self._prefixes, self._suffixes = get_table_data(
+            first_part_prefix, first_part_suffix,
+            last_part_prefix, last_part_suffix)

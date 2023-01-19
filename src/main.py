@@ -11,12 +11,7 @@ usually of Grey or Gold Elf Descent.
 """
 from environs import Env
 
-from elf_name_generator import (
-    ElfNameGenerator,
-    get_pair_numbers,
-    roll_dice,
-    roll_dice_message,
-)
+from elf_name_generator import ElfNameGenerator, get_pair_numbers, roll_dice
 
 env = Env()
 DEBUG = env.bool('DEBUG', 'False')
@@ -27,11 +22,13 @@ if __name__ == "__main__":
         # >>> "9": Shelian Zathusro
         # >>> "9": Age/time master/mistress Royal harp,harper/walker,walks
         elf_name_numbers, dice_number = ([79, 49], [99, [85, 70]]), 9
+        # elf_name_numbers, dice_number = (["'", 53], [30, [9, 26]]), 10
     else:
         dice_number = roll_dice()
         elf_name_numbers = get_pair_numbers(dice_number)
+
     elf = ElfNameGenerator(*elf_name_numbers, dice_number=dice_number)
-    print(f'>>> "{elf.dice_number}":', roll_dice_message(elf.dice_number))
+    print(f'>>> "{elf.dice_number}":', elf.roll_dice_message())
     print(f'>>> "{elf.dice_number}":', elf_name_numbers)
     print(f'>>> "{elf.dice_number}":', elf.get_name())
     print(f'>>> "{elf.dice_number}":', elf.get_definition())

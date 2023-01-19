@@ -9,8 +9,8 @@ from tests.mock_data import elf_name1, elf_name2
 def _make_test_name(elf_name):
     """Mock Factory for ElvenName object."""
     en = ElfNameGenerator(elf_name.first_part, elf_name.last_part)
-    en._t2_data = elf_name.t2_data
-    en._t3_data = elf_name.t3_data
+    en._prefixes = elf_name.t2_data
+    en._suffixes = elf_name.t3_data
     return en
 
 
@@ -27,7 +27,7 @@ def _make_test_first_name():
 def test_first_name():
     """Create first name based on full and first part only."""
     en1 = _make_test_full_name()
-    print(en1._t2_data, en1._t3_data)
+    print(en1._prefixes, en1._suffixes)
     name1 = en1._make_a_word(en1._first_part)
     expected1 = "Shelian"
     assert expected1 == name1
