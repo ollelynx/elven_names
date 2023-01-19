@@ -1,10 +1,17 @@
 """Retrieve names from the file."""
+
 from typing import Optional
 
+from .base_source import SourceObject
+from .file_source import FileSource
 from .message import display_d10
 from .number import get_pair_numbers, roll_dice
 from .typing_ import OptionalStrInt
-from .utils import get_table_data
+
+
+def get_source() -> SourceObject:
+    """Fabric to use FileData or DB Data."""
+    return FileSource()
 
 
 class ElfNameGenerator:
@@ -25,14 +32,18 @@ class ElfNameGenerator:
               and generated automatically.
         """
         self._dice_number = dice_number
-        self._prefixes = None
-        self._suffixes = None
 
         if first_part:
             self._first_part = first_part
             self._last_part = last_part
         else:
             self._roll_dice()
+
+        self._source = get_source()
+        self._source.get_table_data(
+            *_prepare_input_numbers_to_prefix_suffix(
+                self._first_part, self._last_part)
+        )
 
     def get_name(self) -> str:
         """Get a name by a given number.
@@ -41,19 +52,17 @@ class ElfNameGenerator:
             input: (["'", 32], [43, [16, 99]])
             output: Har'Jaavelyth
         """
-        self._get_table_data()
-        f_name = self._make_a_word(self._first_part)
+        f_name = self._source.make_a_word(*self._first_part)
         l_name = ''
         if self._last_part:
-            l_name = ' ' + self._make_a_word(self._last_part)
+            _last_part = (self._last_part
+                          if isinstance(self._last_part, list)
+                          else [self._last_part])
+            l_name = ' ' + self._source.make_a_word(*_last_part)
         return f_name + (l_name[1:] if f_name.endswith("'") else l_name)
 
     def get_alternatives(self):
         """Retrieve alternative names if any."""
-        if not self._prefixes:
-            raise NameError('Run name generator to retrieve alternative '
-                            'names.')
-
         raise NotImplementedError('Make a method!')
 
     def get_definition(self) -> str:
@@ -63,20 +72,20 @@ class ElfNameGenerator:
             input: (["'", 32], [43, [16, 99]])
             output: Wisdom/wise Staff
         """
-        if not self._prefixes:
-            raise NameError('Run name generator to retrieve its definition.')
-
-        definition = self._make_a_definition(self._first_part)
+        definition = self._source.retrieve_a_meaning(self._first_part)
         if self._last_part:
-            definition += ' ' + self._make_a_definition(self._last_part)
+            definition += ' ' + self._source.retrieve_a_meaning(
+                self._last_part)
 
         return definition
 
     def roll_dice_message(self):
+        """Display text of run algo to generate a name numbers."""
         return display_d10(self._dice_number)
 
     @property
     def dice_number(self):
+        """Dice number provides the algo to generate the name."""
         if not self._dice_number:
             return "*"
         return self._dice_number
@@ -86,72 +95,18 @@ class ElfNameGenerator:
         self._dice_number = roll_dice()
         self._first_part, self._last_part = get_pair_numbers(self._dice_number)
 
-    def _make_a_word(self, name_number: OptionalStrInt) -> str:
-        """Concatenate prefix and suffix for a name.
 
-        E.g.
-            name_number: [79, 49], [99, [85, 70]], None
-        """
-        if not name_number:
-            return ''
+def _prepare_input_numbers_to_prefix_suffix(
+        first_part_numbers: OptionalStrInt,
+        second_part_numbers: OptionalStrInt = None):
+    """Divide input numbers to separate variables."""
+    first_part_prefix, first_part_suffix = first_part_numbers
+    last_part_prefix, last_part_suffix = '', ''
 
-        prf_num, prefix = name_number[0], '\''
-        if isinstance(prf_num, int):
-            prefix = self._prefixes[prf_num]['name'][0]  # for 1st element
+    if isinstance(second_part_numbers, list):
+        last_part_prefix = second_part_numbers[0]
+        if len(second_part_numbers) > 1:
+            last_part_suffix = second_part_numbers[1]
 
-        suf_num, suffix = name_number[1], ''
-        if isinstance(suf_num, int):
-            suffix = self._suffixes[suf_num]['name'][0]  # for 1st element
-        elif isinstance(suf_num, list):
-            suffix = ''.join([self._suffixes[_]['name'][0]  # for 1st element
-                              for _ in suf_num])
-
-        if prefix == "'":
-            prefix, suffix = suffix.capitalize(), prefix
-        return prefix + suffix
-
-    def _make_a_definition(self, name_number: OptionalStrInt) -> str:
-        """Create a word based on a name and values."""
-        def delimiter(name):
-            return '/' if len(name) > 1 else ''
-
-        def get_meaning(key, t3=False):
-            table = self._prefixes if not t3 else self._suffixes
-            return table[key]['meaning']
-
-        prf_num, prefix = name_number[0], ''
-        if isinstance(prf_num, int):
-            prefix = get_meaning(prf_num)
-
-        suf_num, suffix = name_number[1], ''
-        if isinstance(suf_num, int):
-            suffix = get_meaning(suf_num, True)
-        elif isinstance(suf_num, list):
-            suffix = []
-            sfx_list = [get_meaning(_, True) for _ in suf_num]
-            for s_l in sfx_list:
-                delimiter_ = "" if len(s_l) == 1 else ","
-                suffix.append(delimiter_.join(s_l))
-
-        definition = delimiter(prefix).join(prefix).capitalize()
-
-        if suffix:
-            definition += ' ' + delimiter(suffix).join(suffix)
-        return definition.lstrip().capitalize()
-
-    def _get_table_data(self) -> None:
-        """Retrieve text from files Table2 and Table3.
-
-        Get text lines of given numbers only.
-        """
-        last_part_prefix, last_part_suffix = '', ''
-        first_part_prefix, first_part_suffix = self._first_part
-
-        if isinstance(self._last_part, list):
-            last_part_prefix = self._last_part[0]
-            if len(self._last_part) > 1:
-                last_part_suffix = self._last_part[1]
-
-        self._prefixes, self._suffixes = get_table_data(
-            first_part_prefix, first_part_suffix,
+    return (first_part_prefix, first_part_suffix,
             last_part_prefix, last_part_suffix)

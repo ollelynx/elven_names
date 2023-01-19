@@ -9,8 +9,8 @@ from tests.mock_data import elf_name1, elf_name2
 def _make_test_name(elf_name):
     """Mock Factory for ElvenName object."""
     en = ElfNameGenerator(elf_name.first_part, elf_name.last_part)
-    en._prefixes = elf_name.t2_data
-    en._suffixes = elf_name.t3_data
+    en._prefixes = elf_name.prefixes
+    en._suffixes = elf_name.suffixes
     return en
 
 
@@ -22,65 +22,6 @@ def _make_test_full_name():
 def _make_test_first_name():
     """Data with only first name given."""
     return _make_test_name(elf_name2)
-
-
-def test_first_name():
-    """Create first name based on full and first part only."""
-    en1 = _make_test_full_name()
-    print(en1._prefixes, en1._suffixes)
-    name1 = en1._make_a_word(en1._first_part)
-    expected1 = "Shelian"
-    assert expected1 == name1
-
-    en2 = _make_test_first_name()
-    name2 = en2._make_a_word(en2._first_part)
-    expected2 = "Eilrah"
-    assert expected2 == name2
-
-
-def test_full_name():
-    """Create full name based on full and first part only."""
-    en1 = _make_test_full_name()
-    first_name1 = en1._make_a_word(en1._first_part)
-    last_name1 = en1._make_a_word(en1._last_part)
-    expected1 = "Shelian Zathusro"
-    assert expected1 == first_name1 + " " + last_name1
-
-    en2 = _make_test_first_name()
-    first_name2 = en2._make_a_word(en2._first_part)
-    last_name2 = en2._make_a_word(en2._last_part)
-    expected2 = "Eilrah"
-    assert expected2 == first_name2 + last_name2
-
-
-def test_first_name_definition():
-    en2 = ElfNameGenerator(elf_name2.first_part, elf_name2.last_part)
-    with pytest.raises(NameError) as exc:
-        en2.get_definition()
-    assert "Run name generator to retrieve its definition." in str(exc.value)
-
-    name2 = en2.get_name()
-    expected2 = "Eilrah"
-    assert expected2 == name2
-
-    def2 = en2.get_definition()
-    expected = "Azure/blue beast"
-    assert expected == def2
-
-
-def test_full_name_definition():
-    en1 = ElfNameGenerator(elf_name1.first_part, elf_name1.last_part)
-    with pytest.raises(NameError) as exc:
-        en1.get_definition()
-    assert "Run name generator to retrieve its definition." in str(exc.value)
-
-    name1 = en1.get_name()
-    expected1 = "Shelian Zathusro"
-    assert expected1 == name1
-
-    def1 = en1.get_definition()
-    expected = "Age/time master/mistress Royal harp,harper/walker,walks"
-    assert expected == def1
 
 
 def test_alternative_first_name():

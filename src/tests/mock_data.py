@@ -1,8 +1,9 @@
 """Mock test data."""
+
 from collections import namedtuple
 
 ElfNameMock = namedtuple('ElfNameMock',
-                         'first_part last_part t2_data t3_data')
+                         'first_part last_part prefixes suffixes')
 
 elf_name1 = ElfNameMock(
     [79, 49],
