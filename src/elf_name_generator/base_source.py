@@ -2,7 +2,7 @@
 
 from abc import ABC, abstractmethod
 
-from .typing_ import OptionalStrInt
+from .typing_aliases import OptionalStrInt
 
 
 class SourceObject(ABC):

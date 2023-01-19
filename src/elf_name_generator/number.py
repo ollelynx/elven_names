@@ -3,7 +3,7 @@
 import random
 from typing import Tuple
 
-from .typing_ import ListStrInt, OptionalStrInt, StrInt
+from .typing_aliases import ListStrInt, OptionalStrInt, StrInt
 
 
 def roll_dice(number=10) -> int:

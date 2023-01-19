@@ -1,11 +1,11 @@
-"""Utils module."""
+"""File source module."""
 
 import os
 import re
 from typing import Tuple
 
 from .base_source import SourceObject
-from .typing_ import List, OptionalStrInt
+from .typing_aliases import List, OptionalStrInt
 
 BASE_DIR = os.path.join(os.path.dirname(__file__))
 FILE_T2 = '../names/t2.txt'
@@ -14,9 +14,6 @@ FILE_T3 = '../names/t3.txt'
 
 class FileSource(SourceObject):
     """Data collects prefixes and suffixes based on given numbers."""
-
-    _prefixes = None
-    _suffixes = None
 
     def make_a_word(self,
                     prefix: OptionalStrInt,

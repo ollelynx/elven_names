@@ -6,7 +6,7 @@ from .base_source import SourceObject
 from .file_source import FileSource
 from .message import display_d10
 from .number import get_pair_numbers, roll_dice
-from .typing_ import OptionalStrInt
+from .typing_aliases import OptionalStrInt
 
 
 def get_source() -> SourceObject:

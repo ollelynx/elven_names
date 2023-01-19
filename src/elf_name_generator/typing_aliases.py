@@ -1,4 +1,4 @@
-"""Extended typing."""
+"""Typing aliases module."""
 
 from typing import List, Optional, Union
 
